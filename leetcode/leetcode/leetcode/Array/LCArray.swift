@@ -109,5 +109,85 @@ class LCArray: NSObject {
 //        }
 //    }
     
+    // 217. 存在重复元素s
+    func containsDuplicate(_ nums: [Int]) -> Bool {
+        
+        if nums.count < 2 {
+            return false
+        }
+        
+        var numbers = nums.sorted()
+        
+        for index in 0 ..< numbers.count - 1 {
+            if (numbers[index] == numbers[index+1]) {
+                return true;
+            }
+        }
+        
+        return false
+    }
+    
+    // 136. 只出现一次的数字
+    func singleNumber(_ nums: [Int]) -> Int {
+        
+        if nums.count % 2 == 0 {
+            return 0
+        }
+        
+        if nums.count < 3 {
+            return nums[0];
+        }
+        
+        var numbers = nums.sorted()
+        
+        for index in 1 ..< numbers.count - 1 {
+        
+            if numbers[index - 1] != numbers[index] {
+                
+                if index == 1 {
+                    
+                    return numbers[0]
+                }
+                
+                if numbers[index] != numbers[index + 1] {
+                    
+                    return numbers[index]
+                }
+                
+            }else {
+                
+                if index ==  numbers.count - 2 {
+                    return numbers[numbers.count - 1]
+                }
+            }
+        }
+        
+        return 0
+    }
+    
+    
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        
+        var repeatDic : [Int: Int] = [:]
+        
+        var repeatArr : [Int] = []
+        
+        
+        for i in nums1 {
+            
+            if var count = repeatDic[i] {
+                
+                repeatDic[i] = count + 1;
+            }else {
+                
+                repeatDic[i] = 0;
+            }
+            
+            
+        }
+        
+        return repeatArr
+    }
+    
 }
 
