@@ -165,7 +165,7 @@ class LCArray: NSObject {
         return 0
     }
     
-    
+    // 350. 两个数组的交集 II
     func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
         
         var repeatDic : [Int: Int] = [:]
@@ -175,7 +175,7 @@ class LCArray: NSObject {
         
         for i in nums1 {
             
-            if var count = repeatDic[i] {
+            if let count = repeatDic[i] {
                 
                 repeatDic[i] = count + 1;
             }else {
@@ -183,11 +183,55 @@ class LCArray: NSObject {
                 repeatDic[i] = 0;
             }
             
+        }
+        
+        for j in nums2 {
             
+            if let count = repeatDic[j] {
+                
+                if count >= 0 {
+                    
+                    repeatDic[j] = count - 1
+                    
+                    repeatArr.append(j)
+                }
+                
+            }
         }
         
         return repeatArr
     }
     
+    // 66. 加一
+    func plusOne(_ digits: [Int]) -> [Int] {
+        
+        var needCarryBit = false
+        
+        var result: [Int] = digits
+        
+        for (index, value) in digits.enumerated().reversed() {
+            
+            if value == 9 {
+                
+                needCarryBit = true
+                
+                result.replaceSubrange(Range.init(NSRange.init(location: index, length: 1))!, with: [Int(0)])
+            }else {
+                
+                needCarryBit = false
+                
+                result.replaceSubrange(Range.init(NSRange.init(location: index, length: 1))!, with: [Int(value + 1)])
+                
+                break
+            }
+        }
+        
+        if needCarryBit {
+            
+            result.insert(1, at: 0)
+        }
+        
+        return result
+    }
 }
 
